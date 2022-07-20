@@ -28,20 +28,22 @@ interface PickerProps {
   withOpacity?: boolean;
   deviderStyle?: any;
   labelStyle?: any;
+  renderItem?: (value: any, label: string) => JSX.Element
 }
 
-const Picker = ({ 
-    containerWidth, 
-    values, 
-    defaultValue, 
-    visibleItems, 
-    itemHeight, 
-    onChange, 
+const Picker = ({
+    containerWidth,
+    values,
+    defaultValue,
+    visibleItems,
+    itemHeight,
+    onChange,
     withTranslateZ,
     withScale,
     withOpacity,
     deviderStyle,
     labelStyle,
+    renderItem
   }: PickerProps) => {
   const translateY = useValue(0);
   const roundedItems = Math.floor(visibleItems / 2)
@@ -72,7 +74,7 @@ const Picker = ({
               extrapolate: Extrapolate.CLAMP,
             }
           );
-  
+
           transform.push({ scale });
         }
 
@@ -106,7 +108,9 @@ const Picker = ({
               },
             ]}
           >
-            <Text style={[styles.label, labelStyle]}>{v.label}</Text>
+            {renderItem ? renderItem(v.value, v.label) :
+              <Text style={[styles.label, labelStyle]}>{v.label}</Text>
+            }
           </Animated.View>
         );
       })}
