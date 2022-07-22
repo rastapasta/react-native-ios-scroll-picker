@@ -29,7 +29,7 @@ const GestureHandler = ({ value, max, onValueChange, defaultValue, values, visib
     velocity,
     state,
   } = usePanGestureHandler();
-  
+
   const snapPoints = new Array(max).fill(0).map((_, i) => i * -itemHeight);
   const translateY = useMemo(
     () =>
@@ -52,7 +52,7 @@ const GestureHandler = ({ value, max, onValueChange, defaultValue, values, visib
     const selectedIndex = Math.round(-currentValue / itemHeight);
     const newValue = values[selectedIndex]?.value;
 
-    if (typeof onValueChange === 'function' && newValue) {
+    if (typeof onValueChange === 'function' && newValue !== undefined) {
       onValueChange(newValue);
     }
   }), [translateY]);
