@@ -28,7 +28,8 @@ interface PickerProps {
   withOpacity?: boolean;
   deviderStyle?: any;
   labelStyle?: any;
-  renderItem?: (value: any, label: string) => JSX.Element
+  renderItem?: (value: any, label: string) => JSX.Element;
+  testID?: string;
 }
 
 const Picker = ({
@@ -43,7 +44,8 @@ const Picker = ({
     withOpacity,
     deviderStyle,
     labelStyle,
-    renderItem
+    renderItem,
+    testID
   }: PickerProps) => {
   const translateY = useValue(0);
   const roundedItems = Math.floor(visibleItems / 2)
@@ -118,7 +120,7 @@ const Picker = ({
   ), []);
 
   return (
-    <View style={[styles.container, { width: containerWidth, height: itemHeight * visibleItems }]}>
+    <View style={[styles.container, { width: containerWidth, height: itemHeight * visibleItems }]} testID={testID}>
       <View style={StyleSheet.absoluteFill}>
         <View
           style={
